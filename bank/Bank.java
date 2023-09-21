@@ -24,6 +24,7 @@ public class Bank {
         ammount = scanner.nextDouble();
 
         if (ammount < 0) {
+            System.out.println("Error");
             scanner.close();
             return false;
         }
@@ -34,7 +35,10 @@ public class Bank {
 
         account.addOperation(operation);
 
+        System.out.println("Success");
+
         scanner.close();
+
         return true;
     }
 
@@ -46,6 +50,7 @@ public class Bank {
         ammount = scanner.nextDouble();
 
         if (ammount < 0) {
+            System.out.println("Error");
             scanner.close();
             return false;
         }
@@ -56,12 +61,29 @@ public class Bank {
 
         account.addOperation(operation);
 
+        System.out.println("Success");
+
         scanner.close();
+
         return true;
     }
 
-    public List<Account> getOperationHistory() {
+    public void getOperationHistory(String token) {
+        Account account = getAccountByToken(token);
 
+        System.out.println("Operation History : ");
+
+        for (Operation operation : account.getOperations()) {
+            System.out.print("\t" + operation.getDate());
+
+            if (operation.getType() == OperationType.DEPOSIT) {
+                System.out.print("\tDEPOSIT");
+            } else {
+                System.out.print("\tWITHDRAWAL");
+            }
+
+            System.out.println("\t" + operation.getAmount());
+        }
     }
 
     /**
@@ -103,7 +125,7 @@ public class Bank {
 
         Account account = new Account(username, password);
 
-        this.accounts.add(account);
+        accounts.add(account);
 
         System.out.println("Your acount has been created successfuly");
 
