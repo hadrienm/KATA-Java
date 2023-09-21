@@ -1,10 +1,10 @@
 package bank;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class Bank {
-    private List<Account> accounts;
+    private List<Account> accounts = new ArrayList<Account>();
 
     private Account getAccountByToken(String token) {
         for (Account account : accounts) {
@@ -16,78 +16,42 @@ public class Bank {
         return null;
     }
 
-    public String authenticate() {
-        Scanner scan = new Scanner(System.in);
-        String username;
-        String password;
-
-        System.out.print("Username: ");
-        username = scan.nextLine();
-
-        System.out.println("Password: ");
-        password = scan.nextLine();
-
+    public String authenticate(String username, String password) {
         for (Account account : accounts) {
-            if (account.getUsername().equals(username)) {
-                if (account.getPassword().equals(password)) {
-                    scan.close();
-                    return account.createToken();
-                }
+            if (account.getUsername().equals(username) && account.getPassword().equals(password)) {
+                return account.createToken();
             }
         }
 
-        scan.close();
         return null;
     }
 
-    public boolean makeDeposit(String token) {
-        Scanner scanner = new Scanner(System.in);
-        double ammount = 0;
-
-        System.out.println("How much money do you want deposit ?");
-        ammount = scanner.nextDouble();
-
-        if (ammount < 0) {
-            System.out.println("Error");
-            scanner.close();
+    public boolean makeDeposit(String token, double amount) {
+        if (amount < 0) {
             return false;
         }
 
-        Operation operation = new Operation(OperationType.DEPOSIT, ammount);
+        Operation operation = new Operation(OperationType.DEPOSIT, amount);
 
         Account account = getAccountByToken(token);
 
         account.addOperation(operation);
-
-        System.out.println("Success");
-
-        scanner.close();
+        account.updateBalance(amount);
 
         return true;
     }
 
-    public boolean makeWithdrawal(String token) {
-        Scanner scanner = new Scanner(System.in);
-        double ammount = 0;
-
-        System.out.println("How much money do you want to withdraw ?");
-        ammount = scanner.nextDouble();
-
-        if (ammount < 0) {
-            System.out.println("Error");
-            scanner.close();
+    public boolean makeWithdrawal(String token, double amount) {
+        if (amount < 0) {
             return false;
         }
 
-        Operation operation = new Operation(OperationType.WITHDRAWAL, ammount);
+        Operation operation = new Operation(OperationType.WITHDRAWAL, amount);
 
         Account account = getAccountByToken(token);
 
         account.addOperation(operation);
-
-        System.out.println("Success");
-
-        scanner.close();
+        account.updateBalance(amount * -1);
 
         return true;
     }
@@ -125,6 +89,10 @@ public class Bank {
      * @return true if the username already taken, otherwise false
      */
     private boolean checkUsernameAlreadyExist(String username) {
+        if (accounts == null) {
+            return false;
+        }
+
         for (Account account : accounts) {
             if (account.getUsername().equals(username)) {
                 return true;
@@ -134,34 +102,16 @@ public class Bank {
         return false;
     }
 
-    public void createAccount() {
-        Scanner scan = new Scanner(System.in);
-        String username;
-        String password;
-
-        System.out.print("Username: ");
-        username = scan.nextLine();
-
-        System.out.println("Password: ");
-        password = scan.nextLine();
-
-        while (checkUsernameAlreadyExist(username) != false) {
-            System.out.println("Error: Username Already Exist");
-
-            System.out.print("Username: ");
-            username = scan.nextLine();
-
-            System.out.println("Password: ");
-            password = scan.nextLine();
+    public boolean createAccount(String username, String password) {
+        if (checkUsernameAlreadyExist(username) == true) {
+            return false;
         }
 
         Account account = new Account(username, password);
 
         accounts.add(account);
 
-        System.out.println("Your acount has been created successfuly");
-
-        scan.close();
+        return true;
     }
 
 }

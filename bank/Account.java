@@ -37,6 +37,10 @@ public class Account {
         return token;
     }
 
+    protected void updateBalance(double amount) {
+        balance += amount;
+    }
+
     protected void addOperation(Operation operation) {
         operations.add(operation);
     }
