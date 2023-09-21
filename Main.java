@@ -3,14 +3,73 @@ import java.util.Scanner;
 import bank.Bank;
 
 public class Main {
-    public static void main(String[] args) {
-        Bank bank = new Bank();
-        Scanner scan = new Scanner(System.in);
-        String answer;
-        String answer2;
-        String token;
+    private static Scanner scan = new Scanner(System.in);
+    private static Bank bank = new Bank();
+    private static String token;
+
+    private static void askCreateAccount() {
         String username;
         String password;
+
+        System.out.print("Username: ");
+        username = scan.nextLine();
+
+        System.out.print("Password: ");
+        password = scan.nextLine();
+
+        if (bank.createAccount(username, password)) {
+            System.out.println("Your acount has been created successfuly");
+        } else {
+            System.out.println("Username is already taken");
+        }
+    }
+
+    private static void askAuthentication() {
+        String username;
+        String password;
+
+        System.out.print("Username: ");
+        username = scan.nextLine();
+
+        System.out.print("Password: ");
+        password = scan.nextLine();
+
+        token = bank.authenticate(username, password);
+    }
+
+    private static void askDeposit() {
+        double amount = 0;
+
+        System.out.println("How much money do you want deposit ?");
+        amount = scan.nextDouble();
+
+        if (bank.makeDeposit(token, amount)) {
+            System.out.println("Success");
+        } else {
+            System.out.println("Error");
+        }
+
+        scan.nextLine();
+    }
+
+    private static void askWithdraw() {
+        double amount = 0;
+
+        System.out.println("How much money do you want to withdraw ?");
+        amount = scan.nextDouble();
+
+        if (bank.makeWithdrawal(token, amount)) {
+            System.out.println("Success");
+        } else {
+            System.out.println("Error");
+        }
+
+        scan.nextLine();
+    }
+
+    public static void main(String[] args) {
+        String answer;
+        String answer2;
 
         while (true) {
             System.out.println("Do you want create account or access to your account ? (create, access, quit)");
@@ -23,25 +82,9 @@ public class Main {
             }
 
             if (answer.toLowerCase().equals("create")) {
-                System.out.print("Username: ");
-                username = scan.nextLine();
-
-                System.out.print("Password: ");
-                password = scan.nextLine();
-
-                if (bank.createAccount(username, password)) {
-                    System.out.println("Your acount has been created successfuly");
-                } else {
-                    System.out.println("Username is already taken");
-                }
+                askCreateAccount();
             } else if (answer.equals("access")) {
-                System.out.print("Username: ");
-                username = scan.nextLine();
-
-                System.out.print("Password: ");
-                password = scan.nextLine();
-
-                token = bank.authenticate(username, password);
+                askAuthentication();
 
                 if (token == null) {
                     System.out.println("Account not found or password is incorrect, please try again");
@@ -58,31 +101,9 @@ public class Main {
                         }
 
                         if (answer2.toLowerCase().equals("deposit")) {
-                            double amount = 0;
-
-                            System.out.println("How much money do you want deposit ?");
-                            amount = scan.nextDouble();
-
-                            if (bank.makeDeposit(token, amount)) {
-                                System.out.println("Success");
-                            } else {
-                                System.out.println("Error");
-                            }
-
-                            scan.nextLine();
+                            askDeposit();
                         } else if (answer2.toLowerCase().equals("withdraw")) {
-                            double amount = 0;
-
-                            System.out.println("How much money do you want to withdraw ?");
-                            amount = scan.nextDouble();
-
-                            if (bank.makeWithdrawal(token, amount)) {
-                                System.out.println("Success");
-                            } else {
-                                System.out.println("Error");
-                            }
-
-                            scan.nextLine();
+                            askWithdraw();
                         } else if (answer2.toLowerCase().equals("history")) {
                             bank.getOperationHistory(token);
                         } else {
