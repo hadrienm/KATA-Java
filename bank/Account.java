@@ -42,8 +42,7 @@ public class Account {
         operations.add(operation);
     }
 
-    protected String randGeneratedStr() {
-
+    protected String createToken() {
         String AlphaNumericStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvxyz0123456789";
 
         StringBuilder s = new StringBuilder(20);
@@ -54,6 +53,8 @@ public class Account {
             s.append(AlphaNumericStr.charAt(ch));
         }
 
-        return s.toString();
+        token = s.toString();
+
+        return token;
     }
 }

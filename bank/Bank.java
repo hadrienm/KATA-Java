@@ -16,6 +16,18 @@ public class Bank {
         return null;
     }
 
+    public String authenticate(String username, String password) {
+        for (Account account : accounts) {
+            if (account.getUsername().equals(username)) {
+                if (account.getPassword().equals(password)) {
+                    return account.createToken();
+                }
+            }
+        }
+
+        return null;
+    }
+
     public boolean makeDeposit(String token) {
         Scanner scanner = new Scanner(System.in);
         double ammount = 0;
