@@ -16,15 +16,27 @@ public class Bank {
         return null;
     }
 
-    public String authenticate(String username, String password) {
+    public String authenticate() {
+        Scanner scan = new Scanner(System.in);
+        String username;
+        String password;
+
+        System.out.print("Username: ");
+        username = scan.nextLine();
+
+        System.out.println("Password: ");
+        password = scan.nextLine();
+
         for (Account account : accounts) {
             if (account.getUsername().equals(username)) {
                 if (account.getPassword().equals(password)) {
+                    scan.close();
                     return account.createToken();
                 }
             }
         }
 
+        scan.close();
         return null;
     }
 
@@ -85,6 +97,11 @@ public class Bank {
 
         System.out.println("Operation History : ");
 
+        if (account.getOperations().isEmpty()) {
+            System.out.println("No operation found");
+            return;
+        }
+
         for (Operation operation : account.getOperations()) {
             System.out.print("\t" + operation.getDate());
 
@@ -96,6 +113,9 @@ public class Bank {
 
             System.out.println("\t" + operation.getAmount());
         }
+
+        System.out.println();
+        System.out.println("Your balence : " + account.getBalance());
     }
 
     /**
