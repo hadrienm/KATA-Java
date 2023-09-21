@@ -38,8 +38,26 @@ public class Bank {
         return true;
     }
 
-    public boolean makeWithdrawal() {
+    public boolean makeWithdrawal(String token) {
+        Scanner scanner = new Scanner(System.in);
+        double ammount = 0;
 
+        System.out.println("How much money do you want to withdraw ?");
+        ammount = scanner.nextDouble();
+
+        if (ammount < 0) {
+            scanner.close();
+            return false;
+        }
+
+        Operation operation = new Operation(OperationType.WITHDRAWAL, ammount);
+
+        Account account = getAccountByToken(token);
+
+        account.addOperation(operation);
+
+        scanner.close();
+        return true;
     }
 
     public List<Account> getOperationHistory() {
