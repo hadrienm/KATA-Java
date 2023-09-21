@@ -6,12 +6,36 @@ import java.util.Scanner;
 public class Bank {
     private List<Account> accounts;
 
-    public String authentification() {
+    private Account getAccountByToken(String token) {
+        for (Account account : accounts) {
+            if (account.getToken() != null && account.getToken().equals(token)) {
+                return account;
+            }
+        }
 
+        return null;
     }
 
-    public void makeDeposit() {
+    public boolean makeDeposit(String token) {
+        Scanner scanner = new Scanner(System.in);
+        double ammount = 0;
 
+        System.out.println("How much money do you want deposit ?");
+        ammount = scanner.nextDouble();
+
+        if (ammount < 0) {
+            scanner.close();
+            return false;
+        }
+
+        Operation operation = new Operation(OperationType.DEPOSIT, ammount);
+
+        Account account = getAccountByToken(token);
+
+        account.addOperation(operation);
+
+        scanner.close();
+        return true;
     }
 
     public boolean makeWithdrawal() {

@@ -6,6 +6,12 @@ public class Operation {
     private double amount;
     private Timestamp date;
 
+    public Operation(OperationType type, double ammount) {
+        this.amount = ammount;
+        this.type = type;
+        this.date = new Timestamp(System.currentTimeMillis());
+    }
+
     protected OperationType getType() {
         return type;
     }

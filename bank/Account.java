@@ -2,8 +2,10 @@ package bank;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Account {
+    private String token;
     private String username;
     private String password;
     private double balance;
@@ -32,8 +34,26 @@ public class Account {
         return username;
     }
 
-    protected void addOperation() {
-
+    protected String getToken() {
+        return token;
     }
 
+    protected void addOperation(Operation operation) {
+        operations.add(operation);
+    }
+
+    protected String randGeneratedStr() {
+
+        String AlphaNumericStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvxyz0123456789";
+
+        StringBuilder s = new StringBuilder(20);
+
+        for (int i = 0; i < 20; i++) {
+            int ch = (int) (AlphaNumericStr.length() * Math.random());
+
+            s.append(AlphaNumericStr.charAt(ch));
+        }
+
+        return s.toString();
+    }
 }
