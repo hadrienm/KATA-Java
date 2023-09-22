@@ -1,4 +1,4 @@
-package bank;
+package katajava.src.main.java.com.katajava.bank;
 
 import java.util.ArrayList;
 import java.util.List;
