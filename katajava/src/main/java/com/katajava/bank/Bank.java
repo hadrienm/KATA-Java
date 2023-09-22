@@ -1,4 +1,4 @@
-package katajava.src.main.java.com.katajava.bank;
+package com.katajava.bank;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,6 +57,8 @@ public class Bank {
 
         Account account = getAccountByToken(token);
 
+        if (account == null) return false;
+
         account.addOperation(operation);
         account.updateBalance(amount);
 
@@ -79,6 +81,8 @@ public class Bank {
         Operation operation = new Operation(OperationType.WITHDRAWAL, amount);
 
         Account account = getAccountByToken(token);
+
+        if (account == null) return false;
 
         account.addOperation(operation);
         account.updateBalance(amount * -1);

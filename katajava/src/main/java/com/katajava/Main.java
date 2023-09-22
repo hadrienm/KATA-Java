@@ -1,7 +1,7 @@
-package katajava.src.main.java.com.katajava;
+package com.katajava;
 import java.util.Scanner;
 
-import katajava.src.main.java.com.katajava.bank.Bank;
+import com.katajava.bank.Bank;
 
 public class Main {
     private static Scanner scan = new Scanner(System.in);

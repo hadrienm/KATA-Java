@@ -1,4 +1,4 @@
-package katajava.src.main.java.com.katajava.bank;
+package com.katajava.bank;
 import java.sql.Timestamp;
 
 public class Operation {

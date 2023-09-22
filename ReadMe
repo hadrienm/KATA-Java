@@ -1,5 +1,9 @@
-for build the project  :
-javac Main.java bank/Account.java bank/Bank.java bank/Operation.java bank/OperationType.java
+## For build the project launch this command at the root of the project :
+```
+javac katajava/src/main/java/com/katajava/bank/Account.java katajava/src/main/java/com/katajava/bank/Bank.java katajava/src/main/java/com/katajava/bank/Operation.java katajava/src/main/java/com/katajava/bank/OperationType.java katajava/src/main/java/com/katajava/Main.java
+```
 
-for launch the project :
+## For launch the project launch this command at the root of the project :
+```
 java Main
+```
