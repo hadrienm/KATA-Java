@@ -5,5 +5,5 @@ javac katajava/src/main/java/com/katajava/bank/Account.java katajava/src/main/ja
 
 ## For launch the project launch this command at the root of the project :
 ```
-java Main
+java -classpath katajava/src/main/java/ com.katajava.Main
 ```
