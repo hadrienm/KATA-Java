@@ -1,0 +1,5 @@
+for build the project  :
+javac Main.java bank/Account.java bank/Bank.java bank/Operation.java bank/OperationType.java
+
+for launch the project :
+java Main
