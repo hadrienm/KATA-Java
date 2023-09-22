@@ -37,14 +37,29 @@ public class Account {
         return token;
     }
 
+    /**
+     * Update account balance
+     * 
+     * @param amount Amount to add to the balance of the account
+     */
     protected void updateBalance(double amount) {
         balance += amount;
     }
 
+    /**
+     * Add Operation to client account
+     * 
+     * @param operation Operation will be add on the account
+     */
     protected void addOperation(Operation operation) {
         operations.add(operation);
     }
 
+    /**
+     * Create token for authenticate client
+     * 
+     * @return token, will be used for all client request to the bank function
+     */
     protected String createToken() {
         String AlphaNumericStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvxyz0123456789";
 

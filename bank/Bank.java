@@ -6,6 +6,12 @@ import java.util.List;
 public class Bank {
     private List<Account> accounts = new ArrayList<Account>();
 
+    /**
+     * Get account by user token
+     * 
+     * @param token user token
+     * @return account of the user linked to the token
+     */
     private Account getAccountByToken(String token) {
         for (Account account : accounts) {
             if (account.getToken() != null && account.getToken().equals(token)) {
@@ -16,6 +22,14 @@ public class Bank {
         return null;
     }
 
+    /**
+     * Check if the given login information is correct
+     * 
+     * @param username
+     * @param password
+     * 
+     * @return token if the information is correct, otherwise null
+     */
     public String authenticate(String username, String password) {
         for (Account account : accounts) {
             if (account.getUsername().equals(username) && account.getPassword().equals(password)) {
@@ -26,6 +40,14 @@ public class Bank {
         return null;
     }
 
+    /**
+     * Function in charge of create deposit
+     * 
+     * @param token  token of the client
+     * @param amount amount of money to deposit of the account
+     * 
+     * @return true if success otherwise false
+     */
     public boolean makeDeposit(String token, double amount) {
         if (amount < 0) {
             return false;
@@ -41,6 +63,14 @@ public class Bank {
         return true;
     }
 
+    /**
+     * Function in charge of create withdrawal
+     * 
+     * @param token  token of the client
+     * @param amount amount of money to deposit of the account
+     * @return true if success otherwise false
+     * 
+     */
     public boolean makeWithdrawal(String token, double amount) {
         if (amount < 0) {
             return false;
@@ -56,6 +86,11 @@ public class Bank {
         return true;
     }
 
+    /**
+     * Get user operatio history
+     * 
+     * @param token token of the client
+     */
     public void getOperationHistory(String token) {
         Account account = getAccountByToken(token);
 
@@ -102,6 +137,13 @@ public class Bank {
         return false;
     }
 
+    /**
+     * Create bank account fo a user
+     * 
+     * @param username
+     * @param password
+     * @return
+     */
     public boolean createAccount(String username, String password) {
         if (checkUsernameAlreadyExist(username) == true) {
             return false;

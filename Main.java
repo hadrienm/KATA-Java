@@ -7,6 +7,10 @@ public class Main {
     private static Bank bank = new Bank();
     private static String token;
 
+    /**
+     * Ask to the user account information
+     * 
+     */
     private static void askCreateAccount() {
         String username;
         String password;
@@ -24,6 +28,10 @@ public class Main {
         }
     }
 
+     /**
+     * Ask to the user authentication information
+     * 
+     */
     private static void askAuthentication() {
         String username;
         String password;
@@ -37,6 +45,10 @@ public class Main {
         token = bank.authenticate(username, password);
     }
 
+    /**
+     * Ask to the user deposit information
+     * 
+     */
     private static void askDeposit() {
         double amount = 0;
 
@@ -52,6 +64,10 @@ public class Main {
         scan.nextLine();
     }
 
+    /**
+     * Ask to the user withdraw information
+     * 
+     */
     private static void askWithdraw() {
         double amount = 0;
 
